@@ -21,6 +21,8 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'dockerd-exporter'
+    static_configs:
+      - targets: ['localhost:9393']
     dns_sd_configs:
     - names:
       - 'tasks.dockerd-exporter'
@@ -28,6 +30,8 @@ scrape_configs:
       port: 9323
 
   - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['localhost:8080']
     dns_sd_configs:
     - names:
       - 'tasks.cadvisor'
@@ -35,6 +39,8 @@ scrape_configs:
       port: 8080
 
   - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['localhost:9100']
     dns_sd_configs:
     - names:
       - 'tasks.node-exporter'
