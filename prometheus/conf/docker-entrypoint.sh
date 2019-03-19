@@ -4,7 +4,7 @@ cat /etc/prometheus/prometheus.yml > /tmp/prometheus.yml
 cat /etc/prometheus/weave-cortex.yml | \
     sed "s@#password: <token>#@password: '$WEAVE_TOKEN'@g" > /tmp/weave-cortex.yml
 
-#JOBS=mongo-exporter:9111 redis-exporter:9112
+$JOBS=node-exporter:9100
 
 if [ ${JOBS+x} ]; then
 

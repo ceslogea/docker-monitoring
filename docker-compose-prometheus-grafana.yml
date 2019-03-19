@@ -19,13 +19,27 @@ configs:
     file: ./prometheus/rules/swarm_task.rules.yml
 
 services:
-  # node-exporter (host metrics collector)
-  node-exporter:
-    image: prom/node-exporter
-    environment:
-      - NODE_ID={{.Node.ID}}
+  # cadvisor (containers metrics collector) http://<swarm-ip>:8080
+  cadvisor:
+    image: google/cadvisor
+    networks:
+      - monitor_network
+    command: -logtostderr -docker_only
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /:/rootfs:ro
+      - /var/run:/var/run
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 128M
+        reservations:
+          memory: 64M
     ports:
-      - 9100:9100
+      - 8080:8080
   # grafana (visualize metrics) http://<swarm-ip>:3000
   grafana:
     image: stefanprodan/swarmprom-grafana:5.0.1
