@@ -8,21 +8,17 @@ services:
     restart: unless-stopped
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      # - ./prometheusdb:/prometheus/data:rw
-      # - ./data/prometheus/config:/etc/prometheus/
-      # - ./data/prometheus/config/prometheus.yml:/etc/prometheus/config/prometheus.yml:ro
-      # - ./data/prometheus/data:/prometheus
     command:
       - --config.file=/etc/prometheus/prometheus.yml
-      # - '-storage.local.path=/prometheus'
-      # - '-alertmanager.url=http://alertmanager:9093'
     expose:
       - 9090
     ports:
       - 9090:9090
-    links:
-      # - cadvisor:cadvisor
-      - node-exporter:node-exporter
+    limits:
+      memory: 128M
+    # links:
+    #   # - cadvisor:cadvisor
+    #   - node-exporter:node-exporter
 
   node-exporter:
     image: prom/node-exporter:latest
@@ -32,7 +28,9 @@ services:
       - 9100:9100
     depends_on:
       - redis
-    
+    limits:
+      memory: 128M   
+
   cadvisor:
     image: google/cadvisor:latest
     container_name: cadvisor
@@ -45,18 +43,28 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
     depends_on:
       - redis
-    
+    limits:
+      memory: 128M
+
   redis:
     image: redis:latest
     container_name: redis
     ports:
       - 6379:6379
-  
+    limits:
+        memory: 2048M
+
   grafana:
       container_name: grafana
       restart: always
-      image: grafana/grafana:4.4.3
+      image: grafana/grafana
+      volumes:
+        # - grafana_data:/var/lib/grafana
+        - ./grafana/provisioning/:/etc/grafana/provisioning/
       ports:
           - "3000:3000"
       environment:
           - GF_INSTALL_PLUGINS=grafana-piechart-panel,jdbranham-diagram-panel
+      limits:
+        memory: 256M
+        # cpus: '0.50'
