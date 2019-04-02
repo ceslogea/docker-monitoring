@@ -1,4 +1,4 @@
-version: '3.2'
+version: '2.3'
 
 services:
 
@@ -14,10 +14,7 @@ services:
       - 9090
     ports:
       - 9090:9090
-    deploy:
-      resources:
-        limits:
-          memory: 128M
+    mem_limit: 128m
     # links:
     #   # - cadvisor:cadvisor
     #   - node-exporter:node-exporter
