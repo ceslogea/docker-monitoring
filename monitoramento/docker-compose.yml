@@ -14,8 +14,10 @@ services:
       - 9090
     ports:
       - 9090:9090
-    limits:
-      memory: 128M
+    deploy:
+      resources:
+        limits:
+          memory: 128M
     # links:
     #   # - cadvisor:cadvisor
     #   - node-exporter:node-exporter
@@ -28,8 +30,10 @@ services:
       - 9100:9100
     depends_on:
       - redis
-    limits:
-      memory: 128M   
+    deploy:
+      resources:
+        limits:
+          memory: 128M   
 
   cadvisor:
     image: google/cadvisor:latest
@@ -43,16 +47,20 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
     depends_on:
       - redis
-    limits:
-      memory: 128M
+    deploy:
+      resources:
+        limits:
+          memory: 128M
 
   redis:
     image: redis:latest
     container_name: redis
     ports:
       - 6379:6379
-    limits:
-        memory: 2048M
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
 
   grafana:
       container_name: grafana
@@ -65,6 +73,8 @@ services:
           - "3000:3000"
       environment:
           - GF_INSTALL_PLUGINS=grafana-piechart-panel,jdbranham-diagram-panel
-      limits:
-        memory: 256M
-        # cpus: '0.50'
+      deploy:
+        resources:
+          limits:
+            memory: 256M
+            # cpus: '0.50'
