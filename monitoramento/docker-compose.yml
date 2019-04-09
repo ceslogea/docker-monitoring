@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2.4'
 
 services:
 
@@ -14,23 +14,15 @@ services:
       - 9090
     ports:
       - 9090:9090
-    # mem_limit: 128m
-    # links:
-    #   # - cadvisor:cadvisor
-    #   - node-exporter:node-exporter
-
+    mem_limit: 128m
+    
   node-exporter:
     image: prom/node-exporter:latest
     container_name: monitoring_node_exporter
     restart: unless-stopped
     ports:
       - 9100:9100
-    depends_on:
-      - redis
-    # deploy:
-    #   resources:
-    #     limits:
-    #       memory: 128M   
+    mem_limit: 64m
 
   cadvisor:
     image: google/cadvisor:latest
@@ -42,32 +34,16 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-    depends_on:
-      - redis
-    # deploy:
-    #   resources:
-    #     limits:
-    #       memory: 128M
+    mem_limit: 64m
 
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - 6379:6379
-  
   grafana:
-      container_name: grafana
-      restart: always
-      image: grafana/grafana
-      volumes:
-        # - grafana_data:/var/lib/grafana
-        - ./grafana/provisioning/:/etc/grafana/provisioning/
-      ports:
-          - "3000:3000"
-      environment:
-          - GF_INSTALL_PLUGINS=grafana-piechart-panel,jdbranham-diagram-panel
-      # deploy:
-      #   resources:
-      #     limits:
-      #       memory: 256M
-      #       # cpus: '0.50'
+    container_name: grafana
+    restart: always
+    image: grafana/grafana
+    volumes:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    ports:
+        - "3000:3000"
+    environment:
+        - GF_INSTALL_PLUGINS=grafana-piechart-panel,jdbranham-diagram-panel
+    mem_limit: 128m
