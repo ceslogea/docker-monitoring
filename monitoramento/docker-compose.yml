@@ -15,7 +15,9 @@ services:
     ports:
       - 9090:9090
     mem_limit: 128m
-    
+    labels:
+      org.label-schema.group: "monitoring"
+
   node-exporter:
     image: prom/node-exporter:latest
     container_name: monitoring_node_exporter
@@ -23,6 +25,8 @@ services:
     ports:
       - 9100:9100
     mem_limit: 64m
+    labels:
+      org.label-schema.group: "monitoring"
 
   cadvisor:
     image: google/cadvisor:latest
@@ -35,6 +39,8 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
     mem_limit: 64m
+    labels:
+      org.label-schema.group: "monitoring"
 
   grafana:
     container_name: grafana
@@ -47,3 +53,5 @@ services:
     environment:
         - GF_INSTALL_PLUGINS=grafana-piechart-panel,jdbranham-diagram-panel
     mem_limit: 128m
+    labels:
+      org.label-schema.group: "monitoring"
