@@ -1705,8 +1705,8 @@
     ]
   },
   "time": {
-    "from": "2019-07-25T20:19:12.560Z",
-    "to": "2019-07-25T20:24:01.148Z"
+    "from": "now-10m",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
