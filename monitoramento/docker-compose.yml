@@ -55,7 +55,7 @@ services:
         - GF_INSTALL_PLUGINS=grafana-piechart-panel,jdbranham-diagram-panel
         - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
         - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-        - GF_USERS_ALLOW_SIGN_UP=false
+        - GF_USERS_ALLOW_SIGN_UP=true
     # mem_limit: 128m
     labels:
       org.label-schema.group: "monitoring"

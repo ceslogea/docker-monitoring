@@ -3411,7 +3411,7 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-10m",
     "to": "now"
   },
   "timepicker": {
@@ -3440,7 +3440,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Monitor Services",
+  "title": "Minitoramento dos sistemas de monitoramento",
   "uid": "Gz8cGcRZz",
   "version": 1
 }
