@@ -4,8 +4,8 @@ Monitoring Stack for Docker.
 
 ## Getting Started
 
-git clone https://github.com/ceslogea/docker-monitoring.git
-docker-compose -f docker-monitoring/monitoramento/docker-compose.yml up -d
+* git clone https://github.com/ceslogea/docker-monitoring.git
+* docker-compose -f docker-monitoring/monitoramento/docker-compose.yml up -d
 
 ## Built With
 
