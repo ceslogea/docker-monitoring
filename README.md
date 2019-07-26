@@ -7,7 +7,7 @@ A monitoring solution for Docker hosts and containers with Prometheus, Grafana, 
 Clone and run stack
 
 * git clone https://github.com/ceslogea/docker-monitoring.git
-* docker-compose -f docker-monitoring/monitoramento/docker-compose.yml up -d
+* docker-compose -f docker-monitoring/monitoring/docker-compose.yml up -d
 
 Containers:
 
