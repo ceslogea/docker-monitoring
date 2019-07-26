@@ -1,11 +1,22 @@
 # Docker Monitoring Stack
 
-Monitoring Stack for Docker.
+A monitoring solution for Docker hosts and containers with Prometheus, Grafana, cAdvisor, NodeExporter.
 
 ## Getting Started
 
+Clone and run stack
+
 * git clone https://github.com/ceslogea/docker-monitoring.git
 * docker-compose -f docker-monitoring/monitoramento/docker-compose.yml up -d
+
+Containers:
+
+* Prometheus (metrics database) http://<host-ip>:9090 
+* Grafana (visualize metrics) http://<host-ip>:3000
+* NodeExporter (host metrics collector) http://<host-ip>:9100
+* cAdvisor (containers metrics collector) http://<host-ip>:8080
+
+Grafana is preconfigured with dashboards and Prometheus as the default data source.
 
 ## Built With
 
